@@ -1,26 +1,212 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ─── Fonts ─── */
+@font-face {
+  font-family: "IBM Plex Arabic";
+  src: url("/fonts/IBMPlexSansArabic-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "IBM Plex Arabic";
+  src: url("/fonts/IBMPlexSansArabic-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: "IBM Plex Arabic";
+  src: url("/fonts/IBMPlexSansArabic-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
 }
 
+/* ─── Theme Colors ─── */
+:root {
+  --background: #f0ede8;
+  --foreground: #3c3c3b;
+  --primary: #9b2226;
+
+  /* Added — surface & UI tokens */
+  --bg: #f0ede8;
+  --surface: #e8e4de;
+  --surface2: #dedad3;
+  --border: #d4cfc8;
+  --border2: #c4bfb7;
+  --text: #3c3c3b;
+  --text2: #6b6b69;
+  --text3: #9a9a97;
+  --accent: #9b2226;
+  --accent2: #c94c50;
+  --teal: #2d8b78;
+  --teal-light: #3da88f;
+  --green: #22c55e;
+  --radius-sm: 8px;
+  --radius: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --font-display: "IBM Plex Arabic", sans-serif;
+  --font-body: "IBM Plex Arabic", sans-serif;
+}
+
+/* ─── Tailwind v4 theme mapping ─── */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-primary: var(--primary);
+  --font-sans: "IBM Plex Arabic", sans-serif;
 }
 
+/* ─── Dark mode ─── */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #1a1a1a;
+    --foreground: #e5e5e5;
+    --white: #e5e5e5;
+    --primary: #c94c50;
+    --bg: #1a1a1a;
+    --surface: #222222;
+    --surface2: #2a2a2a;
+    --border: #333333;
+    --border2: #3d3d3d;
+    --text: #e5e5e5;
+    --text2: #a0a09a;
+    --text3: #666660;
+    --accent: #c94c50;
+    --accent2: #e06366;
   }
 }
 
+/* ─── Base styles ─── */
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "IBM Plex Arabic", sans-serif;
+
+  /* Added */
+  line-height: 1.7;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Added */
+html {
+  direction: rtl;
+  scroll-behavior: smooth;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font-family: "IBM Plex Arabic", sans-serif;
+  cursor: pointer;
+}
+
+/* ─── Utility classes (Added) ─── */
+.eyebrow {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 4vw, 48px);
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.25;
+  margin-bottom: 14px;
+}
+
+.section-sub {
+  font-size: 16px;
+  color: var(--text2);
+  line-height: 1.85;
+  max-width: 560px;
+}
+
+.section-center {
+  text-align: center;
+}
+
+.section-center .section-sub {
+  margin: 0 auto;
+}
+
+.btn-primary {
+  display: inline-block;
+  padding: 13px 28px;
+  border-radius: var(--radius-sm);
+  font-size: 16px;
+  font-weight: 700;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  transition: background 0.2s;
+}
+
+.btn-primary:hover {
+  background: var(--accent2);
+}
+
+.btn-ghost {
+  display: inline-block;
+  padding: 13px 22px;
+  border-radius: var(--radius-sm);
+  font-size: 15px;
+  font-weight: 600;
+  border: 1px solid var(--border2);
+  color: var(--text2);
+  transition: all 0.2s;
+}
+
+.btn-ghost:hover {
+  border-color: var(--text);
+  color: var(--text);
+}
+
+/* ─── Marquee animation (Added) ─── */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  display: flex;
+  gap: 14px;
+  animation: marquee 30s linear infinite;
+  width: max-content;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* ─── Scrollbar (Added) ─── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--surface);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border2);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text3);
 }

@@ -21,8 +21,8 @@ export default function Categories() {
           المساقات المتاحة في المنصة
         </h2>
         <p className="text-foreground/70 text-sm md:text-base">
-          اختر المساق الذي يناسبك وابدأ رحلتك — كل مساق مُصمَّم ليأخذك خطوة
-          خطوة نحو هدف واضح في حفظ القرآن وفهمه وتلاوته.
+          اختر المساق الذي يناسبك وابدأ رحلتك — كل مساق مُصمَّم ليأخذك خطوة خطوة
+          نحو هدف واضح في حفظ القرآن وفهمه وتلاوته.
         </p>
       </div>
 
@@ -34,7 +34,7 @@ export default function Categories() {
               key={i}
               whileHover={{ y: -6 }}
               onClick={() => router.push(`/categories/${cat.id}`)}
-              className="min-w-[260px] md:min-w-0 rounded-2xl overflow-hidden border border-gray-200 bg-white shadow-sm hover:shadow-md transition cursor-pointer"
+              className="min-w-[260px] md:min-w-0  overflow-hidden transition cursor-pointer"
             >
               <Image
                 src={cat.img}

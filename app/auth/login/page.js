@@ -8,9 +8,9 @@ import AuthLayout from "../../../components/auth/AuthLayout";
 import AuthInput from "../../../components/auth/AuthInput";
 import AuthButton from "../../../components/auth/AuthButton";
 import AuthAlert from "../../../components/auth/AuthAlert";
-import Image from "next/image";
+import { Suspense } from "react";
 
-export default function LoginPage() {
+function LoginContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirectTo = searchParams.get("redirect") || "/dashboard";

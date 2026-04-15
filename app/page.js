@@ -1,5 +1,6 @@
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
+import Teacher from "./components/Teacher";
 import Stats from "./components/Stats";
 import About from "./components/About";
 import Features from "./components/Features";
@@ -9,9 +10,9 @@ import Categories from "./components/Categories";
 export default function Home() {
   return (
     <main>
-      <Navbar />
       <Hero />
       <Categories />
+      <Teacher />
       <Stats />
       <About />
       <Features />

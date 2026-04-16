@@ -2,15 +2,24 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { Player } from "@lottiefiles/react-lottie-player";
 
 const courses = [
   {
     id: "course-1",
     title: "مراجعة وتدبر سورة البقرة",
     description:
-      "برنامج مخصص لمراجعة وتدبر سورة البقرة خلال شهر كامل بأسلوب سهل ومنظم",
+      "مساق مخصص لمراجعة وتدبر سورة البقرة خلال شهر كامل بأسلوب سهل ومنظم",
     cta: "ابدأ الآن",
     image: "/courses/course-1.svg",
+  },
+  {
+    id: "course-2",
+    title: "مراجعة وفهم سور آل حم",
+    description:
+      "مساق مخصص لمراجعة وفهم سور آل حم خلال شهر أسبوعين بطريقة منظمة ومنهجية",
+    cta: "ابدأ الآن",
+    image: "/courses/course-2.svg",
   },
 ];
 
@@ -18,11 +27,17 @@ export default function CoursesPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <div className="bg-primary py-16 text-center">
+      <div className="bg-primary py-8 mt-16 text-center">
         <p className="text-sm text-white/90 mb-2">البرامج</p>
-        <h1 className="text-xl md:text-2xl font-bold text-white">
-          مجموعة متنوعة من البرامج المتميزة
-        </h1>
+        <div className="flex text-xl md:text-2xl font-bold text-white">
+          مجموعة متنوعة من البرامج المتميزة{" "}
+          <Player
+            autoplay
+            loop
+            src="/fire.json"
+            style={{ width: 40, height: 40 }}
+          />{" "}
+        </div>
       </div>
 
       {/* Tabs */}

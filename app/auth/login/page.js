@@ -263,3 +263,10 @@ function GoogleButton({ supabase, redirectTo }) {
     </button>
   );
 }
+export default function LoginPage() {
+  return (
+    <Suspense fallback={null}>
+      <LoginContent />
+    </Suspense>
+  );
+}

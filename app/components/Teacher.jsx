@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Link from "next/link";
 
-
 export default function Teacher() {
   const [isExpanded, setIsExpanded] = useState(false);
 

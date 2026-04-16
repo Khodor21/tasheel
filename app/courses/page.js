@@ -2,7 +2,13 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { Player } from "@lottiefiles/react-lottie-player";
+import dynamic from "next/dynamic";
+
+// ✅ FIX: disable SSR for Lottie Player
+const Player = dynamic(
+  () => import("@lottiefiles/react-lottie-player").then((mod) => mod.Player),
+  { ssr: false },
+);
 
 const courses = [
   {
@@ -29,14 +35,16 @@ export default function CoursesPage() {
       {/* Header */}
       <div className="bg-primary py-8 mt-16 text-center">
         <p className="text-sm text-white/90 mb-2">البرامج</p>
-        <div className="flex text-xl md:text-2xl font-bold text-white">
-          مجموعة متنوعة من البرامج المتميزة{" "}
+
+        <div className="flex items-center justify-center gap-2 text-xl md:text-2xl font-bold text-white">
+          مجموعة متنوعة من البرامج المتميزة
+          {/* ✅ Safe render */}
           <Player
             autoplay
             loop
             src="/fire.json"
             style={{ width: 40, height: 40 }}
-          />{" "}
+          />
         </div>
       </div>
 

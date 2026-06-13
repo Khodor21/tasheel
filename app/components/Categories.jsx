@@ -14,15 +14,15 @@ export default function Categories() {
   const router = useRouter();
 
   return (
-    <section className="px-6 md:px-16 py-20">
+    <section id="categories" className="px-6 md:px-16 py-20">
       {/* Header */}
       <div className="max-w-2xl mb-12">
         <h2 className="text-2xl md:text-3xl font-semibold text-primary mb-4">
           المساقات المتاحة في المنصة
         </h2>
         <p className="text-foreground/70 text-sm md:text-base">
-          اختر المساق الذي يناسبك وابدأ رحلتك — كل مساق مُصمَّم ليأخذك خطوة خطوة
-          نحو هدف واضح في حفظ القرآن وفهمه وتلاوته.
+          اختر المساق الذي يناسبك وابدأ رحلتك — كل مساق مُصمَّم ليأخذك خطوة
+          خطوة نحو هدف واضح في حفظ القرآن وفهمه وتلاوته.
         </p>
       </div>
 
@@ -34,7 +34,7 @@ export default function Categories() {
               key={i}
               whileHover={{ y: -6 }}
               onClick={() => router.push(`/categories/${cat.id}`)}
-              className="min-w-[260px] md:min-w-0  overflow-hidden transition cursor-pointer"
+              className="min-w-[260px] md:min-w-0 overflow-hidden transition cursor-pointer"
             >
               <Image
                 src={cat.img}

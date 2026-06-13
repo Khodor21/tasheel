@@ -22,28 +22,38 @@
 
 /* ─── Theme Colors ─── */
 :root {
-  --background: #f0ede8;
-  --foreground: #3c3c3b;
-  --primary: #9b2226;
+  /* Core Palette */
+  --deep-green: #1b4332;
+  --warm-gold: #c9a84c;
+  --light-beige: #f5f0e8;
+  --off-white: #fdfaf4;
 
-  /* Added — surface & UI tokens */
-  --bg: #f0ede8;
-  --surface: #e8e4de;
-  --surface2: #dedad3;
-  --border: #d4cfc8;
-  --border2: #c4bfb7;
-  --text: #3c3c3b;
-  --text2: #6b6b69;
-  --text3: #9a9a97;
-  --accent: #9b2226;
-  --accent2: #c94c50;
-  --teal: #2d8b78;
-  --teal-light: #3da88f;
-  --green: #22c55e;
+  /* UI Token Mapping */
+  --background: var(--deep-green);
+  --foreground: var(--off-white);
+  --primary: var(--warm-gold);
+
+  --bg: var(--deep-green);
+  --surface: var(--light-beige);
+  --surface-card: var(--off-white);
+
+  --border: #2d6a4f; /* Blends well with deep green */
+  --border2: #40916c;
+
+  /* Text scaling for dark main background */
+  --text: var(--off-white);
+  --text-dark: var(--deep-green); /* Use this for text inside the light cards */
+  --text2: var(--light-beige);
+  --text3: #95d5b2;
+
+  --accent: var(--warm-gold);
+  --accent2: #d4b76a; /* Slightly lighter gold for hover states */
+
   --radius-sm: 8px;
   --radius: 14px;
   --radius-lg: 20px;
   --radius-xl: 28px;
+
   --font-display: "IBM Plex Arabic", sans-serif;
   --font-body: "IBM Plex Arabic", sans-serif;
 }
@@ -53,26 +63,20 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
+  --color-surface: var(--surface);
+  --color-card: var(--surface-card);
   --font-sans: "IBM Plex Arabic", sans-serif;
 }
 
 /* ─── Dark mode ─── */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #1a1a1a;
-    --foreground: #e5e5e5;
-    --white: #e5e5e5;
-    --primary: #c94c50;
-    --bg: #1a1a1a;
-    --surface: #222222;
-    --surface2: #2a2a2a;
-    --border: #333333;
-    --border2: #3d3d3d;
-    --text: #e5e5e5;
-    --text2: #a0a09a;
-    --text3: #666660;
-    --accent: #c94c50;
-    --accent2: #e06366;
+    /* Deepen the green further for true dark mode */
+    --background: #081c15;
+    --bg: #081c15;
+    --surface: #1b4332;
+    --surface-card: #2d6a4f;
+    --text-dark: var(--off-white);
   }
 }
 
@@ -80,15 +84,12 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: "IBM Plex Arabic", sans-serif;
-
-  /* Added */
+  font-family: var(--font-body);
   line-height: 1.7;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
 
-/* Added */
 html {
   direction: rtl;
   scroll-behavior: smooth;
@@ -104,11 +105,11 @@ img {
 }
 
 button {
-  font-family: "IBM Plex Arabic", sans-serif;
+  font-family: var(--font-body);
   cursor: pointer;
 }
 
-/* ─── Utility classes (Added) ─── */
+/* ─── Utility classes ─── */
 .eyebrow {
   display: inline-block;
   font-size: 12px;
@@ -123,7 +124,7 @@ button {
   font-family: var(--font-display);
   font-size: clamp(30px, 4vw, 48px);
   font-weight: 700;
-  color: var(--text);
+  color: var(--accent); /* Titles use Warm Gold */
   line-height: 1.25;
   margin-bottom: 14px;
 }
@@ -150,7 +151,7 @@ button {
   font-size: 16px;
   font-weight: 700;
   background: var(--accent);
-  color: #fff;
+  color: var(--deep-green); /* Contrast against gold */
   border: none;
   transition: background 0.2s;
 }
@@ -175,7 +176,7 @@ button {
   color: var(--text);
 }
 
-/* ─── Marquee animation (Added) ─── */
+/* ─── Marquee animation ─── */
 @keyframes marquee {
   0% {
     transform: translateX(0);
@@ -196,17 +197,32 @@ button {
   animation-play-state: paused;
 }
 
-/* ─── Scrollbar (Added) ─── */
+/* ─── Scrollbar ─── */
 ::-webkit-scrollbar {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--surface);
+  background: var(--deep-green);
 }
 ::-webkit-scrollbar-thumb {
   background: var(--border2);
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--text3);
+  background: var(--accent);
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease forwards;
 }

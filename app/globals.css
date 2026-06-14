@@ -23,9 +23,9 @@
 /* ─── Theme Colors ─── */
 :root {
   /* Core Palette */
-  --deep-green: #1b4332;
-  --warm-gold: #c9a84c;
-  --light-beige: #f5f0e8;
+  --deep-green: #0f2c20;
+  --warm-gold: #1e812f;
+  --light-beige: #fffefd;
   --off-white: #fdfaf4;
 
   /* UI Token Mapping */

@@ -56,7 +56,6 @@ export default function RegisterPage() {
 
     setLoading(true);
 
-    // ⚠️ Email وهمي إجباري لـ Supabase
     const fakeEmail = `${form.telegram.replace(/@/g, "")}@app.local`;
 
     const { data, error } = await supabase.auth.signUp({
@@ -83,14 +82,14 @@ export default function RegisterPage() {
         `خطأ غير متوقع (${error.status ?? error.code ?? "422"}).`;
 
       setAlert({ type: "error", message: arabicMsg });
-      console.error("[Supabase signUp error]", error);
     } else if (data?.user?.identities?.length === 0) {
       setAlert({
         type: "error",
         message: "هذا المستخدم مسجّل بالفعل.",
       });
     } else {
-      router.push("/dashboard");
+      // ✅ Logic fix: Push to the main page "/" after successful registration
+      router.push("/");
     }
 
     setLoading(false);
@@ -99,14 +98,14 @@ export default function RegisterPage() {
   return (
     <AuthLayout
       title="أنشئ حسابك"
-      subtitle="ابدأ رحلتك مع القرآن اليوم — مجاناً"
+      subtitle="ابدأ رحلتك في بناء العادات الروحية اليوم"
       footerText="لديك حساب بالفعل؟"
       footerLink="سجّل دخولك"
       footerHref="/auth/login"
     >
       <AuthAlert {...(alert || { message: null })} />
 
-      <form onSubmit={handleRegister}>
+      <form onSubmit={handleRegister} className="flex flex-col gap-2">
         <AuthInput
           label="الاسم الكامل"
           type="text"
@@ -131,7 +130,7 @@ export default function RegisterPage() {
           label="المرحلة أو الاختصاص"
           type="text"
           name="study_field"
-          placeholder="مثال: طالب ثانوي - علمي / هندسة / شريعة..."
+          placeholder="مثال: طالب ثانوي / هندسة / شريعة..."
           value={form.study_field}
           onChange={handleChange}
         />
@@ -155,32 +154,6 @@ export default function RegisterPage() {
           onChange={handleChange}
           required
         />
-
-        <p
-          style={{
-            fontSize: 12,
-            color: "var(--text3)",
-            marginBottom: 20,
-            textAlign: "center",
-            lineHeight: 1.75,
-            fontFamily: '"IBM Plex Arabic", sans-serif',
-          }}
-        >
-          بالتسجيل، أوافق على{" "}
-          <a
-            href="/policy"
-            style={{ color: "var(--primary)", fontWeight: 600 }}
-          >
-            سياسة الخصوصية
-          </a>{" "}
-          و{" "}
-          <a
-            href="/policy"
-            style={{ color: "var(--primary)", fontWeight: 600 }}
-          >
-            شروط الاستخدام
-          </a>
-        </p>
 
         <AuthButton loading={loading}>إنشاء الحساب</AuthButton>
       </form>

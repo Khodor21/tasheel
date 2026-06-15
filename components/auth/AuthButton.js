@@ -1,40 +1,34 @@
+"use client";
+
 export default function AuthButton({ children, loading, disabled }) {
+  const isDisabled = loading || disabled;
+
   return (
     <button
       type="submit"
-      disabled={loading || disabled}
+      disabled={isDisabled}
+      className={`w-full flex items-center justify-center gap-3 rounded-2xl py-4 text-[17px] font-bold tracking-wide transition-all duration-300 outline-none
+        ${
+          isDisabled
+            ? "cursor-not-allowed opacity-70"
+            : "cursor-pointer hover:shadow-lg hover:-translate-y-0.5"
+        }
+      `}
       style={{
-        width: '100%',
-        padding: '13px',
-        borderRadius: 10,
-        fontSize: 15,
-        fontWeight: 700,
-        background: loading || disabled ? 'rgba(155,34,38,0.45)' : 'var(--primary)',
-        color: '#fff',
-        border: 'none',
-        cursor: loading || disabled ? 'not-allowed' : 'pointer',
-        fontFamily: '"IBM Plex Arabic", sans-serif',
-        transition: 'background .2s, opacity .2s',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        gap: 10,
-        letterSpacing: '0.01em',
+        background: isDisabled ? "#9cae9f" : "#6E8A78",
+        color: "#ffffff",
       }}
     >
       {loading && (
-        <span style={{
-          width: 17, height: 17,
-          border: '2px solid rgba(255,255,255,0.35)',
-          borderTopColor: '#fff',
-          borderRadius: '50%',
-          display: 'inline-block',
-          animation: 'spin 0.7s linear infinite',
-          flexShrink: 0,
-        }} />
+        <span
+          className="inline-block w-5 h-5 rounded-full border-2 animate-spin shrink-0"
+          style={{
+            borderColor: "rgba(255, 255, 255, 0.3)",
+            borderTopColor: "#ffffff",
+          }}
+        />
       )}
-      {loading ? 'جاري التحميل...' : children}
-      <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+      <span>{loading ? "جاري التحميل..." : children}</span>
     </button>
   );
 }

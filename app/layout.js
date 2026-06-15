@@ -1,6 +1,5 @@
 import { IBM_Plex_Sans_Arabic } from "next/font/google"; // Recommended for Arabic
 import "./globals.css";
-import Navbar from "./components/Navbar";
 
 // 1. Viewport Export (Newest Standard)
 export const viewport = {

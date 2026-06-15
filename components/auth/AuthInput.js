@@ -1,10 +1,11 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
+import { useState } from "react";
+import { Emoji, EmojiStyle } from "emoji-picker-react";
 
 export default function AuthInput({
   label,
-  type = 'text',
+  type = "text",
   name,
   placeholder,
   value,
@@ -16,23 +17,19 @@ export default function AuthInput({
   const [focused, setFocused] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  const isPassword = type === 'password';
-  const inputType = isPassword ? (showPassword ? 'text' : 'password') : type;
+  const isPassword = type === "password";
+  const inputType = isPassword ? (showPassword ? "text" : "password") : type;
 
   return (
-    <div style={{ marginBottom: 18 }}>
-      <label style={{
-        display: 'block',
-        fontSize: 13,
-        fontWeight: 600,
-        color: 'var(--foreground)',
-        marginBottom: 7,
-        fontFamily: '"IBM Plex Arabic", sans-serif',
-      }}>
+    <div className="mb-3 md:mb-5">
+      <label
+        className="block text-[22px] font-medium mb-1.5"
+        style={{ color: "#4a6252" }}
+      >
         {label}
       </label>
 
-      <div style={{ position: 'relative' }}>
+      <div className="relative">
         <input
           type={inputType}
           name={name}
@@ -43,50 +40,40 @@ export default function AuthInput({
           autoComplete={autoComplete}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
+          className="w-full rounded-sm text-[16px] outline-none transition-all duration-300 placeholder:text-slate-400 font-medium"
           style={{
-            width: '100%',
-            background: focused ? '#fff' : 'var(--background)',
-            border: `1.5px solid ${focused ? 'var(--primary)' : 'var(--border)'}`,
-            borderRadius: 10,
-            padding: isPassword ? '12px 16px 12px 48px' : '12px 16px',
-            fontSize: 15,
-            color: 'var(--foreground)',
-            fontFamily: '"IBM Plex Arabic", sans-serif',
-            outline: 'none',
-            textAlign: 'right',
-            direction: 'rtl',
-            transition: 'border-color .2s, background .2s',
+            background: focused ? "#ffffff" : "rgb(241 245 249 / 0.7)",
+            border: `1.5px solid ${focused ? "#6E8A78" : "transparent"}`,
+            padding: isPassword ? "16px 20px 16px 56px" : "16px 20px", // Bigger tap targets
+            color: "#4a6252",
+            boxShadow: focused ? "0 4px 12px rgba(110,138,120,0.08)" : "none",
+            textAlign: "right",
+            direction: "rtl",
           }}
         />
+
         {isPassword && (
           <button
             type="button"
             onClick={() => setShowPassword(!showPassword)}
-            style={{
-              position: 'absolute',
-              left: 14, top: '50%',
-              transform: 'translateY(-50%)',
-              background: 'none',
-              border: 'none',
-              cursor: 'pointer',
-              fontSize: 15,
-              color: 'var(--text3)',
-              padding: 0,
-              lineHeight: 1,
-            }}
+            className="absolute left-4 top-1/2 -translate-y-1/2 flex items-center justify-center w-10 h-10 rounded-full transition-all hover:bg-slate-100 outline-none"
+            title={showPassword ? "إخفاء كلمة المرور" : "إظهار كلمة المرور"}
           >
-            {showPassword ? '🙈' : '👁️'}
+            {/* 1f648 = 🙈 Monkey, 1f441 = 👁️ Eye */}
+            <Emoji
+              unified={showPassword ? "1f648" : "1f441"}
+              size={22}
+              emojiStyle={EmojiStyle.APPLE}
+            />
           </button>
         )}
       </div>
 
       {hint && (
-        <p style={{
-          fontSize: 12,
-          color: 'var(--text3)',
-          marginTop: 5,
-          fontFamily: '"IBM Plex Arabic", sans-serif',
-        }}>
+        <p
+          className="text-[13px] mt-2 font-medium"
+          style={{ color: "#94a3b8" }}
+        >
           {hint}
         </p>
       )}

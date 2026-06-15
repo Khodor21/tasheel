@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
+import { Emoji, EmojiStyle } from "emoji-picker-react";
+
 export default function AuthLayout({
   children,
   title,
@@ -11,90 +12,23 @@ export default function AuthLayout({
   footerHref,
 }) {
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        background: "var(--background)",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        padding: "40px 20px",
-        position: "relative",
-      }}
-    >
-      {/* Subtle warm radial glow */}
+    <div className="min-h-screen flex flex-col items-center justify-center relative bg-[#feffff] overflow-hidden font-sans dir-rtl">
+      {/* Softer, wider background glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] pointer-events-none z-0" />
+      {/* Main Card - Increased width to 540px and added elegant shadow */}
       <div
+        className="w-full max-w-[640px] bg-white rounded-[12px] p-8 sm:px-2 sm:py-8 relative z-10"
         style={{
-          position: "fixed",
-          top: 0,
-          left: "50%",
-          transform: "translateX(-50%)",
-          width: 900,
-          height: 500,
-          background:
-            "radial-gradient(ellipse at top, rgba(155,34,38,0.06) 0%, transparent 65%)",
-          pointerEvents: "none",
-          zIndex: 0,
-        }}
-      />
-
-      {/* Logo */}
-      <Link
-        href="/"
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: 10,
-          marginBottom: 36,
-          position: "relative",
-          zIndex: 1,
-          textDecoration: "none",
+          border: "1px solid rgba(226, 232, 240, 0.8)",
+          boxShadow: "0 20px 40px -15px rgba(110,138,120,0.15)",
         }}
       >
-        <Image
-          src="/Tasheel-logo.svg"
-          width={140}
-          height={40}
-          alt="Tasheel Logo"
-        />
-      </Link>
-
-      {/* Card */}
-      <div
-        style={{
-          width: "100%",
-          maxWidth: 460,
-          background: "#fff",
-          border: "1px solid var(--border)",
-          borderRadius: 20,
-          padding: "44px 40px",
-          position: "relative",
-          zIndex: 1,
-          boxShadow: "0 2px 24px rgba(60,60,59,0.06)",
-        }}
-      >
-        <div style={{ textAlign: "center", marginBottom: 32 }}>
-          <h1
-            style={{
-              fontFamily: '"IBM Plex Arabic", sans-serif',
-              fontSize: 26,
-              fontWeight: 700,
-              color: "var(--foreground)",
-              marginBottom: 8,
-              lineHeight: 1.3,
-            }}
-          >
+        <div className="text-center mb-10">
+          <h2 className="text-3xl font-black mb-3" style={{ color: "#4a6252" }}>
             {title}
-          </h1>
+          </h2>
           {subtitle && (
-            <p
-              style={{
-                fontSize: 15,
-                color: "var(--text2)",
-                lineHeight: 1.65,
-              }}
-            >
+            <p className="text-base font-medium" style={{ color: "#64748b" }}>
               {subtitle}
             </p>
           )}
@@ -102,25 +36,16 @@ export default function AuthLayout({
 
         {children}
       </div>
-
       {footerText && (
         <p
-          style={{
-            marginTop: 24,
-            fontSize: 14,
-            color: "var(--text2)",
-            position: "relative",
-            zIndex: 1,
-          }}
+          className="mt-3 text-[15px] relative z-10 font-medium"
+          style={{ color: "#64748b" }}
         >
           {footerText}{" "}
           <Link
             href={footerHref}
-            style={{
-              color: "var(--primary)",
-              fontWeight: 600,
-              textDecoration: "none",
-            }}
+            className="font-bold hover:underline transition-all"
+            style={{ color: "#6E8A78" }}
           >
             {footerLink}
           </Link>
